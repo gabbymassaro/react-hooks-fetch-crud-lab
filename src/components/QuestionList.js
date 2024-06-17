@@ -10,18 +10,14 @@ function QuestionList( ) {
       .then(data => setQuestions(data))
   }, [])
 
-  console.log(questions)
-
   return (
     <section>
       <h1>Quiz Questions</h1>
       <ul>
-      {questions.map((item) => (
+      {questions.map((question) => (
           <QuestionItem
-            key={item.id}
-            prompt={item.prompt}
-            answers={item.answers}
-            correctIndex={item.correctIndex}
+            key={question.id}
+            question={question}
           />
         ))}
       </ul>
