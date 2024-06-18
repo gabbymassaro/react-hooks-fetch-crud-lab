@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm(props) {
+function QuestionForm({ setQuestions, questions }) {
 
   const [formData, setFormData] = useState({
     prompt: "",
@@ -18,7 +18,14 @@ function QuestionForm(props) {
     });
   }
 
+  function onCreateQuestion(data) {
+    setQuestions(
+      [...questions, data]
+    )
+  }
+
   function handleSubmit(event) {
+    console.log(event)
     event.preventDefault()
 
     fetch("http://localhost:4000/questions", {
@@ -36,7 +43,7 @@ function QuestionForm(props) {
       }),
     })
       .then((r) => r.json())
-      .then((data) => handleSubmit(data));
+      .then((data) => onCreateQuestion(data));
   }
 
   return (
