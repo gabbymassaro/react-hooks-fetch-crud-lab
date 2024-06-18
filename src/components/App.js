@@ -5,33 +5,31 @@ import QuestionList from "./QuestionList";
 
 function App() {
   const [page, setPage] = useState("List");
-  const [questions, setQuestions] = useState([])
-
-  console.log(questions)
+  const [questions, setQuestions] = useState([]);
 
   function handleDeleteItem(id) {
-    const updatedQuestions =
-      questions.filter((question) => question.id !== id);
+    const updatedQuestions = questions.filter((question) => question.id !== id);
     setQuestions(updatedQuestions);
   }
 
   useEffect(() => {
     fetch("http://localhost:4000/questions")
-      .then(response => response.json())
-      .then(data => setQuestions(data))
-  }, [])
+      .then((response) => response.json())
+      .then((data) => setQuestions(data));
+  }, []);
 
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ?
-        <QuestionForm
-        questions={questions}
-        setQuestions={setQuestions}/> :
+      {page === "Form" ? (
+        <QuestionForm questions={questions} setQuestions={setQuestions} />
+      ) : (
         <QuestionList
-        onHandleDelete={handleDeleteItem}
-        questions={questions}
-        setQuestions={setQuestions}/>}
+          onHandleDelete={handleDeleteItem}
+          questions={questions}
+          setQuestions={setQuestions}
+        />
+      )}
     </main>
   );
 }

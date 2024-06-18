@@ -20,23 +20,20 @@ function QuestionItem({ question, onDeleteItem, questions, setQuestions }) {
   function updateCorrectIndex(data) {
     let updatedQuestions = questions.map((question) => {
       if (question.id === data.id) {
-        return data
+        return data;
       } else {
-        return question
+        return question;
       }
-    })
-
-    setQuestions(updatedQuestions)
+    });
+    setQuestions(updatedQuestions);
   }
 
   function onChangeCorrect(event) {
-    console.log(event.target.value)
-
     fetch(`http://localhost:4000/questions/${id}`, {
       method: "PATCH",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        "correctIndex": event.target.value
+        correctIndex: event.target.value,
       }),
     })
       .then((r) => r.json())
@@ -49,7 +46,9 @@ function QuestionItem({ question, onDeleteItem, questions, setQuestions }) {
       <h5>Prompt: {prompt}</h5>
       <label>
         Correct Answer:
-        <select defaultValue={correctIndex} onChange={onChangeCorrect}>{options}</select>
+        <select defaultValue={correctIndex} onChange={onChangeCorrect}>
+          {options}
+        </select>
       </label>
       <button onClick={handleDeleteClick}>Delete Question</button>
     </li>
