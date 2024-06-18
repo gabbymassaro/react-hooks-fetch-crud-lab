@@ -7,6 +7,8 @@ function App() {
   const [page, setPage] = useState("List");
   const [questions, setQuestions] = useState([])
 
+  console.log(questions)
+
   function handleDeleteItem(id) {
     const updatedQuestions =
       questions.filter((question) => question.id !== id);
@@ -22,7 +24,14 @@ function App() {
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm questions={questions} setQuestions={setQuestions}/> : <QuestionList onHandleDelete={handleDeleteItem} questions={questions}/>}
+      {page === "Form" ?
+        <QuestionForm
+        questions={questions}
+        setQuestions={setQuestions}/> :
+        <QuestionList
+        onHandleDelete={handleDeleteItem}
+        questions={questions}
+        setQuestions={setQuestions}/>}
     </main>
   );
 }
